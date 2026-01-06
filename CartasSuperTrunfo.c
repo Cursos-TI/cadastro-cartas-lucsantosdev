@@ -12,10 +12,16 @@ int main() {
 
   typedef struct {
     char codigo[4]; // Ex: A01
+
+    // Propriedades inseridas pelo usuário
     int populacao;
     float area;
     float pib;
     int pontosTuristicos;
+
+    // Propriedades calculadas
+    float densidadePopulacional;
+    float pibPerCapita;
   } Carta;
 
   Carta cartas[ESTADOS][CIDADES_POR_ESTADO];
@@ -54,6 +60,14 @@ int main() {
       scanf("%d", &cartas[i][j].pontosTuristicos);
 
       printf("------------------------------\n");
+
+      // Cálculos de propriedades calculadas
+      cartas[i][j].densidadePopulacional =
+      cartas[i][j].populacao / cartas[i][j].area;
+
+      cartas[i][j].pibPerCapita =
+      cartas[i][j].pib / cartas[i][j].populacao;
+
     }             
   }
 
@@ -67,9 +81,12 @@ int main() {
       printf("Área: %.2f km²\n", cartas[i][j].area);
       printf("PIB: %.2f bilhões\n", cartas[i][j].pib);
       printf("Pontos Turísticos: %d\n", cartas[i][j].pontosTuristicos);
+      printf("Densidade Populacional: %.2f hab/km²\n", cartas[i][j].densidadePopulacional);
+      printf("PIB per Capita: %.6f\n", cartas[i][j].pibPerCapita);
       printf("------------------------------\n");
     }
   }
 
   return 0;
+  
 } 
